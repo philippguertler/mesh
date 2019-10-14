@@ -31,7 +31,7 @@ By default `ES_6` will be used thus no changes are required for existing install
 
 icon:check[] Core: The core Vert.x library was updated to version `3.8.2`.
 
-icon:plus[] Core: The core plugin framework library was updated to version `2.1.0`.
+icon:check[] Core: The core plugin framework library was updated to version `2.1.0`.
 
 [[v1.0.2]]
 == 1.0.2 (11.10.2019)
