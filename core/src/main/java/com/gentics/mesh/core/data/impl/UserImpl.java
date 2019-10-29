@@ -503,15 +503,6 @@ public class UserImpl extends AbstractMeshCoreVertex<UserResponse, User> impleme
 
 	@Override
 	public User addPermissionsOnRole(MeshVertex sourceNode, GraphPermission permission, MeshVertex targetNode, GraphPermission... toGrant) {
-		// 1. Determine all roles that grant given permission on the source
-		// node.
-		List<? extends Role> rolesThatGrantPermission = new TraversalResult(sourceNode.in(permission.label()).frameExplicit(RoleImpl.class)).list();
-
-		// 2. Add CRUD permission to identified roles and target node
-		for (Role role : rolesThatGrantPermission) {
-			role.grantPermissions(targetNode, toGrant);
-		}
-
 		inheritRolePermissions(sourceNode, targetNode);
 		return this;
 	}
