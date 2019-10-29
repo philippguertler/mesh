@@ -270,7 +270,7 @@ public class NodeRootImpl extends AbstractRootVertex<Node> implements NodeRoot {
 		Node node = parentNode.create(requestUser, schemaVersion, project, branch, uuid);
 
 		// Add initial permissions to the created node
-		requestUser.addCRUDPermissionOnRole(parentNode, CREATE_PERM, node);
+		requestUser.inheritRolePermissions(parentNode, node);
 		requestUser.addPermissionsOnRole(parentNode, READ_PUBLISHED_PERM, node, READ_PUBLISHED_PERM);
 		requestUser.addPermissionsOnRole(parentNode, PUBLISH_PERM, node, PUBLISH_PERM);
 
