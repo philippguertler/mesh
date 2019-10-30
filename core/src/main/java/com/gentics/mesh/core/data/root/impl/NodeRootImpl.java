@@ -213,7 +213,7 @@ public class NodeRootImpl extends AbstractRootVertex<Node> implements NodeRoot {
 		// in one way?
 		project.getNodeRoot().addNode(node);
 		node.setProject(project);
-		node.setCreator(creator);
+		//node.setCreator(creator);
 		node.setCreationTimestamp();
 
 		addNode(node);
@@ -270,9 +270,9 @@ public class NodeRootImpl extends AbstractRootVertex<Node> implements NodeRoot {
 		Node node = parentNode.create(requestUser, schemaVersion, project, branch, uuid);
 
 		// Add initial permissions to the created node
-		requestUser.inheritRolePermissions(parentNode, node);
-		requestUser.addPermissionsOnRole(parentNode, READ_PUBLISHED_PERM, node, READ_PUBLISHED_PERM);
-		requestUser.addPermissionsOnRole(parentNode, PUBLISH_PERM, node, PUBLISH_PERM);
+//		requestUser.inheritRolePermissions(parentNode, node);
+//		requestUser.addPermissionsOnRole(parentNode, READ_PUBLISHED_PERM, node, READ_PUBLISHED_PERM);
+//		requestUser.addPermissionsOnRole(parentNode, PUBLISH_PERM, node, PUBLISH_PERM);
 
 		// Create the language specific graph field container for the node
 		Language language = boot.languageRoot().findByLanguageTag(requestModel.getLanguage());

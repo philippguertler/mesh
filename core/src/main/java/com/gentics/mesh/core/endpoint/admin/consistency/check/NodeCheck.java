@@ -44,28 +44,28 @@ public class NodeCheck extends AbstractConsistencyCheck {
 	private void checkNode(Node node, ConsistencyCheckResult result) {
 		String uuid = node.getUuid();
 
-		checkOut(node, ASSIGNED_TO_PROJECT, ProjectImpl.class, result, HIGH);
+		//checkOut(node, ASSIGNED_TO_PROJECT, ProjectImpl.class, result, HIGH);
 		checkOut(node, HAS_SCHEMA_CONTAINER, SchemaContainerImpl.class, result, HIGH);
 		// checkOut(node, HAS_CREATOR, UserImpl.class, response, MEDIUM);
 
 		boolean isBaseNode = false;
-		Project project = node.out(ASSIGNED_TO_PROJECT).has(ProjectImpl.class).nextOrDefaultExplicit(ProjectImpl.class, null);
-		if (project != null) {
-			Project rootNodeProject = node.in(HAS_ROOT_NODE).has(ProjectImpl.class).nextOrDefaultExplicit(ProjectImpl.class, null);
-			if (rootNodeProject != null) {
-				isBaseNode = true;
-				if (!project.equals(rootNodeProject)) {
-					result.addInconsistency(
-						String.format("The node is root node of project %s but assigned to project %s", rootNodeProject.getUuid(), project.getUuid()),
-						uuid,
-						HIGH);
-				}
-			}
-		}
+//		Project project = node.out(ASSIGNED_TO_PROJECT).has(ProjectImpl.class).nextOrDefaultExplicit(ProjectImpl.class, null);
+//		if (project != null) {
+//			Project rootNodeProject = node.in(HAS_ROOT_NODE).has(ProjectImpl.class).nextOrDefaultExplicit(ProjectImpl.class, null);
+//			if (rootNodeProject != null) {
+//				isBaseNode = true;
+//				if (!project.equals(rootNodeProject)) {
+//					result.addInconsistency(
+//						String.format("The node is root node of project %s but assigned to project %s", rootNodeProject.getUuid(), project.getUuid()),
+//						uuid,
+//						HIGH);
+//				}
+//			}
+//		}
 
-		if (!isBaseNode) {
-			checkOut(node, HAS_PARENT_NODE, NodeImpl.class, result, HIGH);
-		}
+		//if (!isBaseNode) {
+		//	checkOut(node, HAS_PARENT_NODE, NodeImpl.class, result, HIGH);
+		//}
 
 		if (node.getCreationDate() == null) {
 			result.addInconsistency("The node has no creation date", uuid, MEDIUM);
@@ -80,9 +80,9 @@ public class NodeCheck extends AbstractConsistencyCheck {
 		}
 
 		// if the node is not the project root, it must have a parent node for every branch in which it has an initial graph field container
-		if (!isBaseNode) {
-			checkParentNodes(node, result);
-		}
+		//if (!isBaseNode) {
+			//checkParentNodes(node, result);
+		//}
 	}
 
 	/**

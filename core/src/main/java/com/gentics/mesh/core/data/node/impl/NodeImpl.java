@@ -408,12 +408,12 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 		// Create the new container
 		NodeGraphFieldContainerImpl newContainer = getGraph().addFramedVertex(NodeGraphFieldContainerImpl.class);
 		if (original != null) {
-			newContainer.setEditor(editor);
+//			newContainer.setEditor(editor);
 			newContainer.setLastEditedTimestamp();
 			newContainer.setLanguageTag(languageTag);
 			newContainer.setSchemaContainerVersion(original.getSchemaContainerVersion());
 		} else {
-			newContainer.setEditor(editor);
+//			newContainer.setEditor(editor);
 			newContainer.setLastEditedTimestamp();
 			newContainer.setLanguageTag(languageTag);
 			// We need create a new container with no reference. So use the latest version available to use.
@@ -566,12 +566,15 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 
 	@Override
 	public Project getProject() {
-		return out(ASSIGNED_TO_PROJECT, ProjectImpl.class).nextOrNull();
+		String uuid = getProperty("project");
+		return mesh().boot().projectRoot().findByUuid(uuid);
+		//return out(ASSIGNED_TO_PROJECT, ProjectImpl.class).nextOrNull();
 	}
 
 	@Override
 	public void setProject(Project project) {
-		setLinkOut(project, ASSIGNED_TO_PROJECT);
+		setProperty("project", project.getUuid());
+		//setLinkOut(project, ASSIGNED_TO_PROJECT);
 	}
 
 	@Override
@@ -595,7 +598,6 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 		Node node = mesh().boot().nodeRoot().create(creator, schemaVersion, project, uuid);
 		node.setParentNode(branch.getUuid(), this);
 		node.setSchemaContainer(schemaVersion.getSchemaContainer());
-		// setCreated(creator);
 		return node;
 	}
 
