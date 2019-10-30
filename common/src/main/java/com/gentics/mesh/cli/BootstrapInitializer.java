@@ -69,13 +69,6 @@ public interface BootstrapInitializer {
 	JobRoot jobRoot();
 
 	/**
-	 * Return the global node root element. Note that projects have their own node root element.
-	 * 
-	 * @return
-	 */
-	NodeRoot nodeRoot();
-
-	/**
 	 * Return the binary root element.
 	 * 
 	 * @return

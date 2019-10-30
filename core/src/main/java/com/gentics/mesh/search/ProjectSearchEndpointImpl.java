@@ -63,8 +63,8 @@ public class ProjectSearchEndpointImpl extends AbstractProjectEndpoint implement
 	 * Add various search endpoints using the aggregation nodes.
 	 */
 	private void addSearchEndpoints() {
-		registerSearchHandler("nodes", () -> boot.meshRoot().getNodeRoot(), NodeListResponse.class, nodeSearchHandler, nodeExamples
-			.getNodeListResponse(), true);
+//		registerSearchHandler("nodes", () -> boot.meshRoot().getNodeRoot(), NodeListResponse.class, nodeSearchHandler, nodeExamples
+//			.getNodeListResponse(), true);
 		registerSearchHandler("tags", () -> boot.meshRoot().getTagRoot(), TagListResponse.class, tagSearchHandler, tagExamples
 			.createTagListResponse(), false);
 		registerSearchHandler("tagFamilies", () -> boot.meshRoot().getTagFamilyRoot(), TagFamilyListResponse.class, tagFamilySearchHandler,

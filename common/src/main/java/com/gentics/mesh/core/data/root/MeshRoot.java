@@ -94,13 +94,6 @@ public interface MeshRoot extends MeshVertex {
 	TagRoot getTagRoot();
 
 	/**
-	 * Returns the node aggregation vertex.
-	 * 
-	 * @return
-	 */
-	NodeRoot getNodeRoot();
-
-	/**
 	 * Returns the tag family aggregation vertex.
 	 * 
 	 * @return

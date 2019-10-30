@@ -20,6 +20,7 @@ import com.gentics.mesh.core.data.Role;
 import com.gentics.mesh.core.data.User;
 import com.gentics.mesh.core.data.node.Node;
 import com.gentics.mesh.core.data.relationship.GraphPermission;
+import com.gentics.mesh.core.data.root.NodeRoot;
 import com.gentics.mesh.core.rest.common.ContainerType;
 import com.gentics.mesh.dagger.MeshComponent;
 import com.gentics.mesh.graphdb.spi.Database;
@@ -68,13 +69,14 @@ public class DemoDumpGeneratorTest {
 			assertTrue("The webclient user has no read permission on the user root node..", user.hasPermission(boot.meshRoot().getUserRoot(),
 				GraphPermission.READ_PERM));
 
-			assertTrue("We expected to find at least 5 nodes.", boot.meshRoot().getNodeRoot().computeCount() > 5);
+			NodeRoot nodeRoot = boot.meshRoot().getProjectRoot().findByName("demo").getNodeRoot();
+			assertTrue("We expected to find at least 5 nodes.", nodeRoot.computeCount() > 5);
 
 			// Verify that the uuids have been updated
-			assertNotNull(boot.meshRoot().getNodeRoot().findByUuid("df8beb3922c94ea28beb3922c94ea2f6"));
+			assertNotNull(nodeRoot.findByUuid("df8beb3922c94ea28beb3922c94ea2f6"));
 
 			// Verify that all documents are stored in the index
-			for (Node node : boot.meshRoot().getNodeRoot().findAll()) {
+			for (Node node : nodeRoot.findAll()) {
 				NodeGraphFieldContainer container = node.getLatestDraftFieldContainer("en");
 				String languageTag = "en";
 				String projectUuid = node.getProject().getUuid();

@@ -58,7 +58,6 @@ public class NodeGraphFieldImpl extends MeshEdgeImpl implements NodeGraphField {
 	};
 
 	public static FieldUpdater NODE_UPDATER = (container, ac, fieldMap, fieldKey, fieldSchema, schema) -> {
-		MeshComponent mesh = container.getGraphAttribute(GraphAttribute.MESH_COMPONENT);
 		NodeGraphField graphNodeField = container.getNode(fieldKey);
 		NodeField nodeField = fieldMap.getNodeField(fieldKey);
 		boolean isNodeFieldSetToNull = fieldMap.hasField(fieldKey) && (nodeField == null);
@@ -87,8 +86,7 @@ public class NodeGraphFieldImpl extends MeshEdgeImpl implements NodeGraphField {
 		}
 
 		// Handle Update / Create
-		BootstrapInitializer boot = mesh.boot();
-		Node node = boot.nodeRoot().findByUuid(nodeField.getUuid());
+		Node node = ac.getProject().getNodeRoot().findByUuid(nodeField.getUuid());
 		if (node == null) {
 			// TODO We want to delete the field when the field has been explicitly set to null
 			if (log.isDebugEnabled()) {

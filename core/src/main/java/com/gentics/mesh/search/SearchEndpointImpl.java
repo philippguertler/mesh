@@ -107,8 +107,8 @@ public class SearchEndpointImpl extends AbstractInternalEndpoint implements Sear
 		registerHandler("roles", () -> boot.get().meshRoot().getRoleRoot(), RoleListResponse.class, roleSearchHandler, roleExamples
 			.getRoleListResponse(), false);
 
-		registerHandler("nodes", () -> boot.get().meshRoot().getNodeRoot(), NodeListResponse.class, nodeSearchHandler, nodeExamples
-			.getNodeListResponse(), true);
+//		registerHandler("nodes", () -> boot.get().meshRoot().getNodeRoot(), NodeListResponse.class, nodeSearchHandler, nodeExamples
+//			.getNodeListResponse(), true);
 		registerHandler("tags", () -> boot.get().meshRoot().getTagRoot(), TagListResponse.class, tagSearchHandler, tagExamples
 			.createTagListResponse(), false);
 		registerHandler("tagFamilies", () -> boot.get().meshRoot().getTagFamilyRoot(), TagFamilyListResponse.class, tagFamilySearchHandler,

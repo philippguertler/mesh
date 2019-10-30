@@ -408,12 +408,12 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 		// Create the new container
 		NodeGraphFieldContainerImpl newContainer = getGraph().addFramedVertex(NodeGraphFieldContainerImpl.class);
 		if (original != null) {
-//			newContainer.setEditor(editor);
+			// newContainer.setEditor(editor);
 			newContainer.setLastEditedTimestamp();
 			newContainer.setLanguageTag(languageTag);
 			newContainer.setSchemaContainerVersion(original.getSchemaContainerVersion());
 		} else {
-//			newContainer.setEditor(editor);
+			// newContainer.setEditor(editor);
 			newContainer.setLastEditedTimestamp();
 			newContainer.setLanguageTag(languageTag);
 			// We need create a new container with no reference. So use the latest version available to use.
@@ -567,14 +567,17 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 	@Override
 	public Project getProject() {
 		String uuid = getProperty("project");
-		return mesh().boot().projectRoot().findByUuid(uuid);
-		//return out(ASSIGNED_TO_PROJECT, ProjectImpl.class).nextOrNull();
+		if (uuid != null) {
+			return mesh().boot().projectRoot().findByUuid(uuid);
+		} else {
+			return out(ASSIGNED_TO_PROJECT, ProjectImpl.class).nextOrNull();
+		}
 	}
 
 	@Override
 	public void setProject(Project project) {
 		setProperty("project", project.getUuid());
-		//setLinkOut(project, ASSIGNED_TO_PROJECT);
+		// setLinkOut(project, ASSIGNED_TO_PROJECT);
 	}
 
 	@Override
@@ -595,7 +598,7 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 
 		// We need to use the (meshRoot)--(nodeRoot) node instead of the
 		// (project)--(nodeRoot) node.
-		Node node = mesh().boot().nodeRoot().create(creator, schemaVersion, project, uuid);
+		Node node = project.getNodeRoot().create(creator, schemaVersion, project, uuid);
 		node.setParentNode(branch.getUuid(), this);
 		node.setSchemaContainer(schemaVersion.getSchemaContainer());
 		return node;
@@ -1611,8 +1614,9 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 		NodeParameters nodeParameters = ac.getNodeParameters();
 		VersioningParameters versioningParameters = ac.getVersioningParameters();
 
-		NodeGraphFieldContainer container = findVersion(nodeParameters.getLanguageList(options()), ac.getBranch(getProject()).getUuid(), versioningParameters
-			.getVersion());
+		NodeGraphFieldContainer container = findVersion(nodeParameters.getLanguageList(options()), ac.getBranch(getProject()).getUuid(),
+			versioningParameters
+				.getVersion());
 		if (container == null) {
 			if (log.isDebugEnabled()) {
 				log.debug("Could not find any matching i18n field container for node {" + getUuid() + "}.");
@@ -2014,8 +2018,9 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 		ContainerType type = forVersion(versioiningParameters.getVersion());
 
 		Node parentNode = getParentNode(branch.getUuid());
-		NodeGraphFieldContainer container = findVersion(ac.getNodeParameters().getLanguageList(options()), branch.getUuid(), ac.getVersioningParameters()
-			.getVersion());
+		NodeGraphFieldContainer container = findVersion(ac.getNodeParameters().getLanguageList(options()), branch.getUuid(),
+			ac.getVersioningParameters()
+				.getVersion());
 
 		/**
 		 * branch uuid

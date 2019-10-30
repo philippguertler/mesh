@@ -774,11 +774,6 @@ public class BootstrapInitializerImpl implements BootstrapInitializer {
 	}
 
 	@Override
-	public NodeRoot nodeRoot() {
-		return meshRoot().getNodeRoot();
-	}
-
-	@Override
 	public BinaryRoot binaryRoot() {
 		return meshRoot().getBinaryRoot();
 	}
@@ -834,7 +829,6 @@ public class BootstrapInitializerImpl implements BootstrapInitializer {
 			meshRoot = meshRoot();
 
 			// Create the initial root vertices
-			meshRoot.getNodeRoot();
 			meshRoot.getTagRoot();
 			meshRoot.getTagFamilyRoot();
 			meshRoot.getProjectRoot();

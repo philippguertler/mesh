@@ -196,7 +196,6 @@ public class ProjectImpl extends AbstractMeshCoreVertex<ProjectResponse, Project
 			setBaseNode(baseNode);
 			// Add the node to the aggregation nodes
 			getNodeRoot().addNode(baseNode);
-			mesh().boot().nodeRoot().addNode(baseNode);
 		}
 		return baseNode;
 	}

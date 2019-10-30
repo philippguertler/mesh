@@ -290,25 +290,6 @@ public class MeshRootImpl extends MeshVertexImpl implements MeshRoot {
 	}
 
 	@Override
-	public NodeRoot getNodeRoot() {
-		if (nodeRoot == null) {
-			synchronized (MeshRootImpl.class) {
-				NodeRoot foundNodeRoot = out(HAS_NODE_ROOT).nextOrDefaultExplicit(NodeRootImpl.class, null);
-				if (foundNodeRoot == null) {
-					nodeRoot = getGraph().addFramedVertex(NodeRootImpl.class);
-					linkOut(nodeRoot, HAS_NODE_ROOT);
-					if (log.isDebugEnabled()) {
-						log.debug("Created node root {" + nodeRoot.getUuid() + "}");
-					}
-				} else {
-					nodeRoot = foundNodeRoot;
-				}
-			}
-		}
-		return nodeRoot;
-	}
-
-	@Override
 	public TagFamilyRoot getTagFamilyRoot() {
 		if (tagFamilyRoot == null) {
 			synchronized (MeshRootImpl.class) {

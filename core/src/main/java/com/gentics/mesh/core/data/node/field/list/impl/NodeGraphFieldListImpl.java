@@ -80,7 +80,7 @@ public class NodeGraphFieldListImpl extends AbstractReferencingGraphFieldList<No
 			if (item == null) {
 				throw error(BAD_REQUEST, "field_list_error_null_not_allowed", fieldKey);
 			}
-			Node node = boot.nodeRoot().findByUuid(item.getUuid());
+			Node node = ac.getProject().getNodeRoot().findByUuid(item.getUuid());
 			if (node == null) {
 				throw error(BAD_REQUEST, "node_list_item_not_found", item.getUuid());
 			}
