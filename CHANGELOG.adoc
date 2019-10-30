@@ -23,6 +23,10 @@ include::content/docs/variables.adoc-include[]
 
 * The support for the embedded Elasticsearch will be dropped in the future. It is highly recommended to link:{{< relref "elasticsearch.asciidoc" >}}#_dedicated_elasticsearch[setup Elasticsearch as a dedicated service].
 
+[[Unreleased]]
+
+icon:plus[] Core: The amount of the deployed REST API verticles can now be link:{{< relref "administration-guide.asciidoc" >}}#_httpsssl[configured] and its default has been changed from 5 to 2 * CPU Cores.
+
 [[v1.1.0]]
 == 1.1.0 (29.10.2019)
 
