@@ -336,22 +336,22 @@ public class HandlerUtilities {
 	 * Locks writes. Use this to prevent concurrent write transactions.
 	 */
 	public void lock() {
-		if (syncWrites) {
-			try {
-				writeLock.acquire();
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
-		}
+//		if (syncWrites) {
+//			try {
+//				writeLock.acquire();
+//			} catch (InterruptedException e) {
+//				throw new RuntimeException(e);
+//			}
+//		}
 	}
 
 	/**
 	 * Releases the lock that was acquired in {@link #lock()}.
 	 */
 	public void unlock() {
-		if (syncWrites) {
-			writeLock.release();
-		}
+//		if (syncWrites) {
+//			writeLock.release();
+//		}
 	}
 
 }
