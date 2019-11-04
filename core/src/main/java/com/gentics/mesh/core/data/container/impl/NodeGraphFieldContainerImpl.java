@@ -398,8 +398,9 @@ public class NodeGraphFieldContainerImpl extends AbstractGraphFieldContainerImpl
 					log.debug("Found conflicting container with uuid {" + conflictingContainer.getUuid() + "} of node {" + conflictingNode.getUuid()
 						+ "}");
 				}
-				throw nodeConflict(conflictingNode.getUuid(), conflictingContainer.getDisplayFieldValue(), conflictingContainer.getLanguageTag(),
-					conflictI18n, segmentFieldName, segment);
+//				throw nodeConflict(conflictingNode.getUuid(), conflictingContainer.getDisplayFieldValue(), conflictingContainer.getLanguageTag(),
+//					conflictI18n, segmentFieldName, segment);
+				return true;
 			} else {
 				edge.setSegmentInfo(segmentInfo);
 				return true;

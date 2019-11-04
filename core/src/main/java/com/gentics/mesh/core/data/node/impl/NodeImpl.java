@@ -566,8 +566,8 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 
 	@Override
 	public void setParentNode(String branchUuid, Node parent) {
-		outE(HAS_PARENT_NODE).has(BRANCH_UUID_KEY, branchUuid).removeAll();
-		addFramedEdge(HAS_PARENT_NODE, parent).setProperty(BRANCH_UUID_KEY, branchUuid);
+		//outE(HAS_PARENT_NODE).has(BRANCH_UUID_KEY, branchUuid).removeAll();
+		//maddFramedEdge(HAS_PARENT_NODE, parent).setProperty(BRANCH_UUID_KEY, branchUuid);
 	}
 
 	@Override

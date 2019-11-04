@@ -332,6 +332,8 @@ public class NodeEndpointTest extends AbstractMeshTest implements BasicRestTestc
 		request.setParentNodeUuid(parentNodeUuid);
 
 		NodeResponse restNode = call(() -> client().createNode(nodeUuid, PROJECT_NAME, request));
+		
+		call(() -> client().publishNode(projectName(), restNode.getUuid()));
 	}
 
 	@Test
