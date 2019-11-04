@@ -38,7 +38,7 @@ import io.vertx.core.Vertx;
 @GraphElement
 public class MeshVertexImpl extends AbstractVertexFrame implements MeshVertex {
 
-	private String uuid;
+	protected String uuid;
 
 	public static void init(TypeHandler type, IndexHandler index) {
 		type.createVertexType(MeshVertexImpl.class, null);

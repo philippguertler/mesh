@@ -498,12 +498,18 @@ public class NodeImpl extends AbstractGenericFieldContainerVertex<NodeResponse, 
 
 	@Override
 	public void setSchemaContainer(SchemaContainer schema) {
-		setLinkOut(schema, HAS_SCHEMA_CONTAINER);
+		setProperty("schema", schema.getUuid());
+		// setLinkOut(schema, HAS_SCHEMA_CONTAINER);
 	}
 
 	@Override
 	public SchemaContainer getSchemaContainer() {
-		return out(HAS_SCHEMA_CONTAINER, SchemaContainerImpl.class).nextOrNull();
+		String schemaUuid = getProperty("schema");
+		if (schemaUuid == null) {
+			return out(HAS_SCHEMA_CONTAINER, SchemaContainerImpl.class).nextOrNull();
+		} else {
+			return mesh().boot().schemaContainerRoot().findByUuid(schemaUuid);
+		}
 	}
 
 	@Override

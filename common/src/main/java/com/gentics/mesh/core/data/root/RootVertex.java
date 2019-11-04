@@ -168,13 +168,13 @@ public interface RootVertex<T extends MeshCoreVertex<? extends RestModel, T>> ex
 		// Try to load the element using the index. This way no record load will happen.
 		T t = db().index().findByUuid(getPersistanceClass(), uuid);
 		if (t != null) {
-			FramedGraph graph = Tx.get().getGraph();
+//			FramedGraph graph = Tx.get().getGraph();
 			// Use the edge index to determine whether the element is part of this root vertex
-			Iterable<Edge> edges = graph.getEdges("e." + getRootLabel().toLowerCase() + "_inout", db().createComposedIndexKey(t
-				.getId(), id()));
-			if (edges.iterator().hasNext()) {
+//			Iterable<Edge> edges = graph.getEdges("e." + getRootLabel().toLowerCase() + "_inout", db().createComposedIndexKey(t
+//				.getId(), id()));
+//			if (edges.iterator().hasNext()) {
 				return t;
-			}
+//			}
 		}
 		return null;
 	}

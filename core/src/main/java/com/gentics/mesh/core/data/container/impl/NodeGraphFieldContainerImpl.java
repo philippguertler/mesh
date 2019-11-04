@@ -38,6 +38,7 @@ import java.util.stream.StreamSupport;
 import org.apache.commons.collections.CollectionUtils;
 
 import com.gentics.madl.index.IndexHandler;
+import com.gentics.madl.tx.Tx;
 import com.gentics.madl.type.TypeHandler;
 import com.gentics.mesh.context.BulkActionContext;
 import com.gentics.mesh.context.InternalActionContext;
@@ -93,6 +94,7 @@ import com.google.common.base.Equivalence;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
 import com.syncleus.ferma.traversals.EdgeTraversal;
+import com.tinkerpop.blueprints.Vertex;
 
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -119,12 +121,20 @@ public class NodeGraphFieldContainerImpl extends AbstractGraphFieldContainerImpl
 
 	@Override
 	public void setSchemaContainerVersion(GraphFieldSchemaContainerVersion<?, ?, ?, ?, ?> version) {
-		setSingleLinkOutTo(version, HAS_SCHEMA_CONTAINER_VERSION);
+		setProperty("schema", version.getUuid());
+		// setSingleLinkOutTo(version, HAS_SCHEMA_CONTAINER_VERSION);
+
 	}
 
 	@Override
 	public SchemaContainerVersion getSchemaContainerVersion() {
-		return out(HAS_SCHEMA_CONTAINER_VERSION, SchemaContainerVersionImpl.class).nextOrNull();
+		String uuid = getProperty("schema");
+		if (uuid == null) {
+			return out(HAS_SCHEMA_CONTAINER_VERSION, SchemaContainerVersionImpl.class).nextOrNull();
+		} else {
+			Vertex v = db().getVertices(SchemaContainerVersionImpl.class, new String[] { "uuid" }, new String[] { uuid }).next();
+			return Tx.get().getGraph().frameElement(v, SchemaContainerVersionImpl.class);
+		}
 	}
 
 	@Override
@@ -638,8 +648,9 @@ public class NodeGraphFieldContainerImpl extends AbstractGraphFieldContainerImpl
 
 	@Override
 	public TraversalResult<? extends MicronodeGraphFieldList> getMicronodeListFields(MicroschemaContainerVersion version) {
-		return new TraversalResult<>(out(HAS_LIST).has(MicronodeGraphFieldListImpl.class).mark().out(HAS_ITEM).has(MicronodeImpl.class).out(HAS_MICROSCHEMA_CONTAINER).has(
-			MicroschemaContainerVersionImpl.class).has("uuid", version.getUuid()).back().frameExplicit(MicronodeGraphFieldListImpl.class));
+		return new TraversalResult<>(
+			out(HAS_LIST).has(MicronodeGraphFieldListImpl.class).mark().out(HAS_ITEM).has(MicronodeImpl.class).out(HAS_MICROSCHEMA_CONTAINER).has(
+				MicroschemaContainerVersionImpl.class).has("uuid", version.getUuid()).back().frameExplicit(MicronodeGraphFieldListImpl.class));
 	}
 
 	@Override

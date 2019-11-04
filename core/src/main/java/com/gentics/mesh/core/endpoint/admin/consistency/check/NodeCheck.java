@@ -45,7 +45,7 @@ public class NodeCheck extends AbstractConsistencyCheck {
 		String uuid = node.getUuid();
 
 		//checkOut(node, ASSIGNED_TO_PROJECT, ProjectImpl.class, result, HIGH);
-		checkOut(node, HAS_SCHEMA_CONTAINER, SchemaContainerImpl.class, result, HIGH);
+		// checkOut(node, HAS_SCHEMA_CONTAINER, SchemaContainerImpl.class, result, HIGH);
 		// checkOut(node, HAS_CREATOR, UserImpl.class, response, MEDIUM);
 
 		boolean isBaseNode = false;
