@@ -13,4 +13,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Build with Maven
+      env:
+        JAVA_1_11_HOME: "/usr/lib/jvm/zulu-11-azure-amd64"
+        JAVA_1_8_HOME: "/usr/lib/jvm/zulu-8-azure-amd64"
       run: mvn -fae -Dmaven.javadoc.skip=true -Dskip.cluster.tests=true -Dmaven.test.failure.ignore=true -B -U -e -pl '!demo,!doc,!performance-tests' clean install
